@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import Form from "../modules/Form";
+import { useRouter } from "next/router";
+import axios from "axios";
 
 function AddCustomerPage() {
   const [form, setForm] = useState({
@@ -10,10 +12,39 @@ function AddCustomerPage() {
     address: "",
     postalcode: "",
     data: "",
-    product: [],
+    products: [],
   });
-  const saveHandler = () => {};
-  const cancelHandler = () => {};
+  const router = useRouter();
+
+  const saveHandler = async () => {
+    const res = await fetch("/api/customer", {
+      method: "POST",
+      body: JSON.stringify({ data: form }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const data = await res.json();
+
+    // const data = await axios.post("/api/customer", form);
+
+    if (data.status === "success") router.push("/");
+  };
+  const cancelHandler = () => {
+    setForm({
+      name: "",
+      lastName: "",
+      email: "",
+      phone: "",
+      address: "",
+      postalcode: "",
+      data: "",
+      products: [],
+    });
+
+    router.push("/");
+  };
 
   return (
     <div className="customer-page">
