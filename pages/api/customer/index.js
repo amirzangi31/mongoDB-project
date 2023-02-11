@@ -15,7 +15,6 @@ export default async function handler(req, res) {
     const data = req.body.data;
 
     if (!data.name || !data.lastName || !data.email) {
-      return;
       res.status(400).json({ status: "failed", message: "Invalid Data" });
     }
 

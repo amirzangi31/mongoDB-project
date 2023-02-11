@@ -26,6 +26,10 @@ a {
   margin: 20px 0 40px;
 }
 
+.header a {
+  color: white  !important;
+}
+
 .main {
   min-height: 85vh;
 }
